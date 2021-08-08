@@ -621,18 +621,18 @@ typedef enum
 } SDL_WindowFlags;
 
 
-//#define SDL_WINDOWPOS_UNDEFINED_MASK    0x1FFF0000u // TODO ?
-//#define SDL_WINDOWPOS_UNDEFINED_DISPLAY(X)  (SDL_WINDOWPOS_UNDEFINED_MASK|(X)) // TODO ?
-//#define SDL_WINDOWPOS_UNDEFINED         SDL_WINDOWPOS_UNDEFINED_DISPLAY(0) // TODO ?
+//#define SDL_WINDOWPOS_UNDEFINED_MASK    0x1FFF0000u
+//#define SDL_WINDOWPOS_UNDEFINED_DISPLAY(X)  (SDL_WINDOWPOS_UNDEFINED_MASK|(X))
+//#define SDL_WINDOWPOS_UNDEFINED         SDL_WINDOWPOS_UNDEFINED_DISPLAY(0)
 //#define SDL_WINDOWPOS_ISUNDEFINED(X)    \
-//	        (((X)&0xFFFF0000) == SDL_WINDOWPOS_UNDEFINED_MASK) // TODO ?
+//	        (((X)&0xFFFF0000) == SDL_WINDOWPOS_UNDEFINED_MASK)
 //
 //
-//#define SDL_WINDOWPOS_CENTERED_MASK    0x2FFF0000u // TODO ?
-//#define SDL_WINDOWPOS_CENTERED_DISPLAY(X)  (SDL_WINDOWPOS_CENTERED_MASK|(X)) // TODO ?
-//#define SDL_WINDOWPOS_CENTERED         SDL_WINDOWPOS_CENTERED_DISPLAY(0) // TODO ?
+//#define SDL_WINDOWPOS_CENTERED_MASK    0x2FFF0000u
+//#define SDL_WINDOWPOS_CENTERED_DISPLAY(X)  (SDL_WINDOWPOS_CENTERED_MASK|(X))
+//#define SDL_WINDOWPOS_CENTERED         SDL_WINDOWPOS_CENTERED_DISPLAY(0)
 //#define SDL_WINDOWPOS_ISCENTERED(X)    \
-//	        (((X)&0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK) // TODO ?
+//	        (((X)&0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK)
 
 
 typedef enum
@@ -2831,7 +2831,7 @@ void SDL_PauseAudioDevice(SDL_AudioDeviceID dev, int pause_on);
 //SDL_AudioSpec *SDL_LoadWAV_RW(SDL_RWops * src, int freesrc, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len); // TODO ?
 //#define SDL_LoadWAV(file, spec, audio_buf, audio_len) SDL_LoadWAV_RW(SDL_RWFromFile(file, "rb"),1, spec,audio_buf,audio_len) // TODO ?
 
-void SDL_FreeWAV(Uint8 * audio_buf); // TODO ?
+//void SDL_FreeWAV(Uint8 * audio_buf); // TODO ?
 
 int SDL_BuildAudioCVT(SDL_AudioCVT * cvt, SDL_AudioFormat src_format, Uint8 src_channels, int src_rate, SDL_AudioFormat dst_format, Uint8 dst_channels, int dst_rate);
 int SDL_ConvertAudio(SDL_AudioCVT * cvt);
