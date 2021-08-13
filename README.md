@@ -4,9 +4,8 @@ SDL2 binding for PHP using FFI
 Tested with PHP-cli 8.0.x under Linux.
 
 
-This binding reuses and tries to improve the encapsulating method from [oratoto/raylib-php-ffi](https://github.com/oraoto/raylib-php-ffi) applied to SDL2 :
-
 - the SDL C API is encapsulated into a PHP class `SDL` which only contains `const` and `static` members ;
+- after ` include("./include/SDL.php"); ` it has to be initialised using a ` SDL::SDL(); ` ;
 - basic C `#define SDL_XXXX` constants and basic C enums are converted into PHP as class `const` accessible using `SDL::MY_CONST_NAME` ;
 - C preprocessor macros are converted into PHP as public static methods accessible using `SDL::MY_MACRO_NAME( $A , $B )` ;
 - C processor const and C enums that use complex preprocessor macro are converted into PHP as public static arrays. Example : ` public static $PIXELFORMAT = []; `. They are initialised using a private static functions (ex: `_init_SDL_PixelFormatEnum()`) which are all called at once by ` SDL::SDL() `.
