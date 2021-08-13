@@ -1817,32 +1817,7 @@ class SDL
 	public static function __callStatic( $method , $args )
 	{
 		$callable = [static::$ffi, 'SDL_'.$method];
-		// TODO: argument unpack segfaults
-		// return static::getFFI()->$method(...$args);
-		switch (count($args)) {
-			case 0:
-				return $callable();
-			case 1:
-				return $callable( $args[0] );
-			case 2:
-				return $callable( $args[0] , $args[1] );
-			case 3:
-				return $callable( $args[0] , $args[1] , $args[2] );
-			case 4:
-				return $callable( $args[0] , $args[1] , $args[2] , $args[3] );
-			case 5:
-				return $callable( $args[0] , $args[1] , $args[2] , $args[3] , $args[4] );
-			case 6:
-				return $callable( $args[0] , $args[1] , $args[2] , $args[3] , $args[4] , $args[5] );
-			case 7:
-				return $callable( $args[0] , $args[1] , $args[2] , $args[3] , $args[4] , $args[5] , $args[6] );
-			case 8:
-				return $callable( $args[0] , $args[1] , $args[2] , $args[3] , $args[4] , $args[5] , $args[6], $args[7] );
-			case 9:
-				return $callable( $args[0] , $args[1] , $args[2] , $args[3] , $args[4] , $args[5] , $args[6], $args[7], $args[8] );
-			default:
-				echo "SDL::__callStatic( $method , ... ) needs support for ".count( $args )." args ...".PHP_EOL;
-		}
+		return $callable(...$args);
 	}
 
 
