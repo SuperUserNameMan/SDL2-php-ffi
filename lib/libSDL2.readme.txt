@@ -1,0 +1,2 @@
+Source-code origin  : https://www.libsdl.org/download-2.0.php
+Source-code license : zlib
