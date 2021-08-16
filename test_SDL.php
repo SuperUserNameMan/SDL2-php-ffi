@@ -1,7 +1,6 @@
 <?php
-include("./include/SDL.php");
+include_once("./include/SDL.php");
 
-SDL::SDL();
 
 if ( SDL::Init( SDL::INIT_VIDEO ) != 0 )
 {
