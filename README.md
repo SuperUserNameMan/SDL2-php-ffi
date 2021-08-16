@@ -5,7 +5,7 @@ Tested with PHP-cli 8.0.x under Linux.
 
 
 - the SDL C API is encapsulated into a PHP class `SDL` which only contains `const` and `static` members ;
-- after ` include("./include/SDL.php"); ` it has to be initialised using a ` SDL::SDL(); ` ;
+- it is auto-init uppon ` include_once("./include/SDL.php"); ` ;
 - basic C `#define SDL_XXXX` constants and basic C enums are converted into PHP as class `const` accessible using `SDL::MY_CONST_NAME` ;
 - C preprocessor macros are converted into PHP as public static methods accessible using `SDL::MY_MACRO_NAME( $A , $B )` ;
 - C processor const and C enums that use complex preprocessor macro are converted into PHP as public static arrays. Example : ` public static $PIXELFORMAT = []; `. They are initialised using a private static functions (ex: `_init_SDL_PixelFormatEnum()`) which are all called at once by ` SDL::SDL() `.
@@ -16,9 +16,7 @@ Tested with PHP-cli 8.0.x under Linux.
 
 ```` PHP
 <?php
-include("./include/SDL.php");
-
-SDL::SDL();
+include_once("./include/SDL.php");
 
 if ( SDL::Init( SDL::INIT_VIDEO ) != 0 )
 {
