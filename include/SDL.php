@@ -1,5 +1,7 @@
 <?php
 
+SDL::SDL(); // autoinit
+
 class SDL
 {
 	//----------------------------------------------------------------------------------
@@ -1806,6 +1808,12 @@ class SDL
 
 	public static function SDL()
 	{
+		if ( static::$ffi ) 
+		{ 
+			debug_print_backtrace();
+			exit("SDL::SDL() already init".PHP_EOL); 
+		}
+		
 		$cdef = __DIR__ . '/SDL.ffi.php.h';
 		static::$ffi = FFI::load($cdef);
 		static::_init_SDL_PixelFormatEnum();
