@@ -40,7 +40,10 @@ class SDL
 		const ICONV_EILSEQ =  -3 ;
 		const ICONV_EINVAL =  -4 ;
 
-		public static function FOURCC( $A, $B, $C, $D ) { return ( ord($A)<<0 ) | ( ord($B)<<8 ) | ( ord($C)<<16 ) | ( ord($D)<<24 ) ; }
+		public static function FOURCC( string $A , string $B , string $C , string $D ) : int
+		{ 
+			return ( ord($A)<<0 ) | ( ord($B)<<8 ) | ( ord($C)<<16 ) | ( ord($D)<<24 ) ; 
+		}
 
 		// ------------------------
 		// from SDL.h :
@@ -584,19 +587,22 @@ class SDL
 		const PACKEDLAYOUT_1010102 = 8 ;
 
 
-		public static function DEFINE_PIXELFOURCC( $A , $B , $C , $D ) { return static::FOURCC( $A , $B , $C , $D ); }
+		public static function DEFINE_PIXELFOURCC( string $A , string $B , string $C , string $D ) : int
+		{ 
+			return static::FOURCC( $A , $B , $C , $D ); 
+		}
 
-		public static function DEFINE_PIXELFORMAT( $type , $order , $layout , $bits , $bytes )
+		public static function DEFINE_PIXELFORMAT( int $type , int $order , int $layout , int $bits , int $bytes ) : int
 		{
 			return ( ( 1<<28 ) | ( $type<<24 ) | ( $order<<20 ) | ( $layout<<16 ) | ( $bits<<8 ) | ( $bytes<<0 ) ) ;
 		}
 
-		public static function PIXELFLAG    ( $X ) { return ( ( $X>>28 ) & 0x0F ); }
-		public static function PIXELTYPE    ( $X ) { return ( ( $X>>24 ) & 0x0F ); }
-		public static function PIXELORDER   ( $X ) { return ( ( $X>>20 ) & 0x0F ); }
-		public static function PIXELLAYOUT  ( $X ) { return ( ( $X>>16 ) & 0x0F ); }
-		public static function BITSPERPIXEL ( $X ) { return ( ( $X>> 8 ) & 0xFF ); }
-		public static function BYTESPERPIXEL( $X )
+		public static function PIXELFLAG    ( int $X ) : int { return ( ( $X>>28 ) & 0x0F ); }
+		public static function PIXELTYPE    ( int $X ) : int { return ( ( $X>>24 ) & 0x0F ); }
+		public static function PIXELORDER   ( int $X ) : int { return ( ( $X>>20 ) & 0x0F ); }
+		public static function PIXELLAYOUT  ( int $X ) : int { return ( ( $X>>16 ) & 0x0F ); }
+		public static function BITSPERPIXEL ( int $X ) : int { return ( ( $X>> 8 ) & 0xFF ); }
+		public static function BYTESPERPIXEL( int $X )
 		{
 			if ( static::ISPIXELFORMAT_FOURCC( $X ) )
 			{
@@ -616,7 +622,7 @@ class SDL
 			return ( $X>>0 ) & 0xFF ;
 		}
 
-		public static function ISPIXELFORMAT_INDEXED( $format )
+		public static function ISPIXELFORMAT_INDEXED( int $format ) : bool
 		{
 			return (
 				! static::ISPIXELFORMAT_FOURCC( $format )
@@ -631,7 +637,7 @@ class SDL
 			);
 		}
 
-		public static function ISPIXELFORMAT_PACKED( $format )
+		public static function ISPIXELFORMAT_PACKED( int $format ) : bool
 		{
 			return (
 				! static::ISPIXELFORMAT_FOURCC( $format )
@@ -646,7 +652,7 @@ class SDL
 			);
 		}
 
-		public static function ISPIXELFORMAT_ARRAY( $format )
+		public static function ISPIXELFORMAT_ARRAY( int $format ) : bool
 		{
 			return (
 				! static::ISPIXELFORMAT_FOURCC( $format )
@@ -665,7 +671,7 @@ class SDL
 			);
 		}
 
-		public static function ISPIXELFORMAT_ALPHA( $format )
+		public static function ISPIXELFORMAT_ALPHA( int $format ) : bool
 		{
 			return (
 				(
@@ -699,7 +705,7 @@ class SDL
 		}
 
 
-		public static function ISPIXELFORMAT_FOURCC( $format )
+		public static function ISPIXELFORMAT_FOURCC( int $format ) : bool
 		{
 			return ( $format && ( static::PIXELFLAG( $format ) != 1 ) );
 		}
@@ -817,11 +823,13 @@ class SDL
 		const LIL_ENDIAN = 1234 ;
 		const BIG_ENDIAN = 4321 ;
 
-		private static function _isLittleEndian() { // https://stackoverflow.com/questions/9744904/how-to-get-the-endianness-type-in-php
+		private static function _isLittleEndian() : bool
+		{ 
+			// https://stackoverflow.com/questions/9744904/how-to-get-the-endianness-type-in-php
 			return unpack('S',"\x01\x00")[1] === 1;
 		}
 
-		public static function BYTEORDER()
+		public static function BYTEORDER() : int
 		{
 			return static::_isLittleEndian() ? static::LIL_ENDIAN : static::BIG_ENDIAN ;
 		}
@@ -1135,7 +1143,7 @@ class SDL
 
 	const K_SCANCODE_MASK = (1<<30) ;
 
-	public static function SCANCODE_TO_KEYCODE( $X ) { return ( $X | static::K_SCANCODE_MASK ); }
+	public static function SCANCODE_TO_KEYCODE( int $X ) : int { return ( $X | static::K_SCANCODE_MASK ); }
 
 	static $K = [];
 
@@ -1446,7 +1454,7 @@ class SDL
 	const MOUSEWHEEL_NORMAL    = 0 ;
 	const MOUSEWHEEL_FLIPPED   = 1 ;
 
-	public static function BUTTON( $X ) { return ( 1 << ( $X - 1 ) ) ; }
+	public static function BUTTON( int $X ) : int { return ( 1 << ( $X - 1 ) ) ; }
 
 	const BUTTON_LEFT   = 1 ;
 	const BUTTON_MIDDLE = 2 ;
@@ -1620,13 +1628,13 @@ class SDL
 	const AUDIO_MASK_ENDIAN        = (1<<12);
 	const AUDIO_MASK_SIGNED        = (1<<15);
 
-	public static function AUDIO_BITSIZE( $x )         { return ( $x & static::AUDIO_MASK_BITSIZE ); }
-	public static function AUDIO_ISFLOAT( $x )         { return ( $x & static::AUDIO_MASK_DATATYPE); }
-	public static function AUDIO_ISBIGENDIAN( $x )     { return ( $x & static::AUDIO_MASK_ENDIAN  ); }
-	public static function AUDIO_ISSIGNED( $x )        { return ( $x & static::AUDIO_MASK_SIGNED  ); }
-	public static function AUDIO_ISINT( $x )           { return ( !static::AUDIO_ISFLOAT( $x )    ); }
-	public static function AUDIO_ISLITTLEENDIAN( $x )  { return ( !static::AUDIO_ISBIGENDIAN( $x )); }
-	public static function AUDIO_ISUNSIGNED( $x )      { return ( !static::AUDIO_ISSIGNED( $x )   ); }
+	public static function AUDIO_BITSIZE       ( int $x ) : int { return ( $x & static::AUDIO_MASK_BITSIZE      ); }
+	public static function AUDIO_ISFLOAT       ( int $x ) : int { return ( $x & static::AUDIO_MASK_DATATYPE     ); }
+	public static function AUDIO_ISBIGENDIAN   ( int $x ) : int { return ( $x & static::AUDIO_MASK_ENDIAN       ); }
+	public static function AUDIO_ISSIGNED      ( int $x ) : int { return ( $x & static::AUDIO_MASK_SIGNED       ); }
+	public static function AUDIO_ISINT         ( int $x ) : int { return (    ! static::AUDIO_ISFLOAT    ( $x ) ); }
+	public static function AUDIO_ISLITTLEENDIAN( int $x ) : int { return (    ! static::AUDIO_ISBIGENDIAN( $x ) ); }
+	public static function AUDIO_ISUNSIGNED    ( int $x ) : int { return (    ! static::AUDIO_ISSIGNED   ( $x ) ); }
 
 	static $AUDIO = [];
 
@@ -1676,7 +1684,7 @@ class SDL
 	//---------------------------------------
 	// SDL_timer.h
 
-	public static function TICKS_PASSED( $A , $B ) { return ( ( $B - $A ) <= 0 ); }
+	public static function TICKS_PASSED( int $A , int $B ) : int { return ( ( $B - $A ) <= 0 ); }
 
 
 	//---------------------------------------
@@ -1796,7 +1804,7 @@ class SDL
 	const DISABLE =  0 ;
 	const ENABLE  =  1 ;
 
-	public static function GetEventState( $type ) { return static::EventState( $type , static::QUERY ); }
+	public static function GetEventState( int $type ) : int { return static::EventState( $type , static::QUERY ); }
 
 
 
@@ -1822,7 +1830,7 @@ class SDL
 	}
 
 
-	public static function __callStatic( $method , $args )
+	public static function __callStatic( string $method , array $args ) : mixed
 	{
 		$callable = [static::$ffi, 'SDL_'.$method];
 		return $callable(...$args);
@@ -1834,7 +1842,7 @@ class SDL
 	//---------------------------------------------------------------------------------
 
 	// void SDL_GetWindowSize(SDL_Window * window, int *w, int *h);
-	public static function GetWindowSize( $window )
+	public static function GetWindowSize( object $window ) : array
 	{
 		$w = FFI::new("int[1]");
 		$h = FFI::new("int[1]");
@@ -1845,7 +1853,7 @@ class SDL
 	}
 
 	// void SDL_GL_GetDrawableSize(SDL_Window * window, int *w, int *h);
-	public static function GL_GetDrawableSize( $window )
+	public static function GL_GetDrawableSize( object $window ) : array
 	{
 		$w = FFI::new("int[1]");
 		$h = FFI::new("int[1]");
@@ -1856,7 +1864,7 @@ class SDL
 	}
 
 	// Uint32 SDL_GetMouseState(int *x, int *y);
-	public static function GetMouseState()
+	public static function GetMouseState() : array
 	{
 		$x = FFI::new("int[1]");
 		$y = FFI::new("int[1]");
@@ -1867,7 +1875,7 @@ class SDL
 	}
 
 	// Uint32 SDL_GetGlobalMouseState(int *x, int *y);
-	public static function GetGlobalMouseState()
+	public static function GetGlobalMouseState() : array
 	{
 		$x = FFI::new("int[1]");
 		$y = FFI::new("int[1]");
@@ -1878,7 +1886,7 @@ class SDL
 	}
 
 	// Uint32 SDL_GetRelativeMouseState(int *x, int *y);
-	public static function GetRelativeMouseState()
+	public static function GetRelativeMouseState() : array
 	{
 		$x = FFI::new("int[1]");
 		$y = FFI::new("int[1]");
@@ -1889,7 +1897,7 @@ class SDL
 	}
 
 	// const Uint8 *SDL_GetKeyboardState(int *numkeys);
-	public static function GetKeyboardState()
+	public static function GetKeyboardState() : array
 	{
 		$len = FFI::new("int[1]");
 
