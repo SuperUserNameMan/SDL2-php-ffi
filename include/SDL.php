@@ -1823,7 +1823,18 @@ class SDL
 		}
 		
 		$cdef = __DIR__ . '/SDL.ffi.php.h';
-		static::$ffi = FFI::load($cdef);
+		
+		$lib_dir = defined('FFI_LIB_DIR') ? FFI_LIB_DIR : 'lib' ;
+		
+		$slib = "./$lib_dir/".match( PHP_OS_FAMILY ) 
+		{
+			'Linux'   => 'libSDL2.so',
+			'Windows' => 'SDL2.dll',
+		};
+		
+		static::$ffi = FFI::cdef( file_get_contents( $cdef ) , $slib );
+		
+		
 		static::_init_SDL_PixelFormatEnum();
 		static::_init_SDL_KeyCode();
 		static::_init_AUDIO_formats();
