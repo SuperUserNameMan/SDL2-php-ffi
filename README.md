@@ -6,6 +6,7 @@ Tested with PHP-cli 8.0.x under Linux.
 
 - the SDL C API is encapsulated into a PHP class `SDL` which only contains `const` and `static` members ;
 - it is auto-init uppon ` include_once("./include/SDL.php"); ` ;
+- depending on your OS, it will load `lbSDL2.so` or `SDL2.dll` from `./lib/` (default) or from `FFI_LIB_DIR` if defined ;
 - basic C `#define SDL_XXXX` constants and basic C enums are converted into PHP as class `const` accessible using `SDL::MY_CONST_NAME` ;
 - C preprocessor macros are converted into PHP as public static methods accessible using `SDL::MY_MACRO_NAME( $A , $B )` ;
 - C processor const and C enums that use complex preprocessor macro are converted into PHP as public static arrays. Example : ` public static $PIXELFORMAT = []; `. They are initialised using a private static functions (ex: `_init_SDL_PixelFormatEnum()`) which are all called at once by ` SDL::SDL() `.
@@ -49,9 +50,21 @@ SDL::DestroyWindow( $win );
 SDL::Quit();
 ````
 
+If your `.dll` or `.so` are stored into an other subdirectory, you can define this subdirectory :
+
+````PHP
+<?php
+define( 'FFI_LIB_DIR' , 'my_sub_directory/mu_sub_sub_directory' );
+
+include( './include/SDL.php' );
+
+...
+````
+
 
 ## TODO and missing stuff :
-- [ ] make it compatible with Windows
+- [X] make it compatible with Windows
+- [ ] LINUX : make possible to use default system `.so` if no custom `libSDL2.so` are provided ;
 - [ ] macro ` SDL_OutOfMemory() `
 - [ ] macro ` SDL_Unsupported() `
 - [ ] macro ` SDL_InvalidParamError( param ) `
