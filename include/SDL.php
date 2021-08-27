@@ -1828,8 +1828,8 @@ class SDL
 		
 		$slib = "./$lib_dir/".match( PHP_OS_FAMILY ) 
 		{
-			'Linux'   => 'libSDL2.so',
-			'Windows' => 'SDL2.dll',
+			'Linux'   => 'libSDL2.'.PHP_SHLIB_SUFFIX,
+			'Windows' => 'SDL2.'.PHP_SHLIB_SUFFIX,
 		};
 		
 		static::$ffi = FFI::cdef( file_get_contents( $cdef ) , $slib );
