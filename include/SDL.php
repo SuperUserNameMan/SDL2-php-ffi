@@ -344,6 +344,31 @@ class SDL
 
 
 		//--------------------------------------------------------------
+		// SDL_messagebox.h
+
+		// typedef enum SDL_MessageBoxFlags :
+		const MESSAGEBOX_ERROR                 = 0x00000010 ;   /**< error dialog */
+		const MESSAGEBOX_WARNING               = 0x00000020 ;   /**< warning dialog */
+		const MESSAGEBOX_INFORMATION           = 0x00000040 ;   /**< informational dialog */
+		const MESSAGEBOX_BUTTONS_LEFT_TO_RIGHT = 0x00000080 ;   /**< buttons placed left to right */
+		const MESSAGEBOX_BUTTONS_RIGHT_TO_LEFT = 0x00000100 ;   /**< buttons placed right to left */
+
+
+		// typedef enum SDL_MessageBoxButtonFlags :
+		const MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT = 0x00000001 ;  /**< Marks the default button when return is hit */
+		const MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT = 0x00000002 ;  /**< Marks the default button when escape is hit */
+
+		// typedef enum SDL_MessageBoxColorType :
+		const MESSAGEBOX_COLOR_BACKGROUND         = 0 ;
+		const MESSAGEBOX_COLOR_TEXT               = 1 ;
+		const MESSAGEBOX_COLOR_BUTTON_BORDER      = 2 ;
+		const MESSAGEBOX_COLOR_BUTTON_BACKGROUND  = 3 ;
+		const MESSAGEBOX_COLOR_BUTTON_SELECTED    = 4 ;
+		const MESSAGEBOX_COLOR_MAX                = 5 ;
+		
+		
+
+		//--------------------------------------------------------------
 		// SDL_video.h
 
 		// typedef enum SDL_WindowFlags :
@@ -1828,8 +1853,8 @@ class SDL
 		
 		$slib = "./$lib_dir/".match( PHP_OS_FAMILY ) 
 		{
-			'Linux'   => 'libSDL2.'.PHP_SHLIB_SUFFIX,
-			'Windows' => 'SDL2.'.PHP_SHLIB_SUFFIX,
+			'Linux'   => 'libSDL2.so',
+			'Windows' => 'SDL2.dll',
 		};
 		
 		static::$ffi = FFI::cdef( file_get_contents( $cdef ) , $slib );
