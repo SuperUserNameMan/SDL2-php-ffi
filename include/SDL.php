@@ -1942,4 +1942,14 @@ class SDL
 		return [ $state , $len[0] ];
 	}
 
+	public static function BlitSurface( object $src , object|null $srcrect , object $dst , object|null $dstrect ) : int 
+	{
+		return static::$ffi->SDL_UpperBlit( $src , $srcrect , $dst , $dstrect );
+	}
+
+	public static function BlitScaled( object $src ,  object|null $srcrect , object $dst , object|null $dstrect ) : int
+	{
+		return static::$ffi->SDL_UpperBlitScaled( $src , $srcrect , $dst , $dstrect );
+	}
+
 };
