@@ -1168,7 +1168,7 @@ class SDL
 
 	const K_SCANCODE_MASK = (1<<30) ;
 
-	public static function SCANCODE_TO_KEYCODE( int $X ) : int { return ( $X | static::K_SCANCODE_MASK ); }
+	public static function SCANCODE_TO_KEYCODE( int $X ) : int { return (int)( $X | static::K_SCANCODE_MASK ); }
 
 	static $K = [];
 
@@ -1177,76 +1177,76 @@ class SDL
 
 		static::$K['UNKNOWN'   ] = 0 ;
 
-		static::$K['RETURN'    ] = ord('\r' ) ;
-		static::$K['ESCAPE'    ] = ord('\033' ) ;
-		static::$K['BACKSPACE' ] = ord('\b' ) ;
-		static::$K['TAB'       ] = ord('\t' ) ;
-		static::$K['SPACE'     ] = ord(' ' ) ;
-		static::$K['EXCLAIM'   ] = ord('!' ) ;
-		static::$K['QUOTEDBL'  ] = ord('"' ) ;
-		static::$K['HASH'      ] = ord('#' ) ;
-		static::$K['PERCENT'   ] = ord('%' ) ;
-		static::$K['DOLLAR'    ] = ord('$' ) ;
-		static::$K['AMPERSAND' ] = ord('&' ) ;
-		static::$K['QUOTE'     ] = ord('\'' ) ;
-		static::$K['LEFTPAREN' ] = ord('(' ) ;
-		static::$K['RIGHTPAREN'] = ord(')' ) ;
-		static::$K['ASTERISK'  ] = ord('*' ) ;
-		static::$K['PLUS'      ] = ord('+' ) ;
-		static::$K['COMMA'     ] = ord(',' ) ;
-		static::$K['MINUS'     ] = ord('-' ) ;
-		static::$K['PERIOD'    ] = ord('.' ) ;
-		static::$K['SLASH'     ] = ord('/' ) ;
-		static::$K['0'         ] = ord('0' ) ;
-		static::$K['1'         ] = ord('1' ) ;
-		static::$K['2'         ] = ord('2' ) ;
-		static::$K['3'         ] = ord('3' ) ;
-		static::$K['4'         ] = ord('4' ) ;
-		static::$K['5'         ] = ord('5' ) ;
-		static::$K['6'         ] = ord('6' ) ;
-		static::$K['7'         ] = ord('7' ) ;
-		static::$K['8'         ] = ord('8' ) ;
-		static::$K['9'         ] = ord('9' ) ;
-		static::$K['COLON'     ] = ord(':' ) ;
-		static::$K['SEMICOLON' ] = ord(';' ) ;
-		static::$K['LESS'      ] = ord('<' ) ;
-		static::$K['EQUALS'    ] = ord('=' ) ;
-		static::$K['GREATER'   ] = ord('>' ) ;
-		static::$K['QUESTION'  ] = ord('?' ) ;
-		static::$K['AT'        ] = ord('@' ) ;
+		static::$K['RETURN'    ] = ord( "\r" ) ;
+		static::$K['ESCAPE'    ] = ord( "\033" ) ;
+		static::$K['BACKSPACE' ] = ord( "\b" ) ;
+		static::$K['TAB'       ] = ord( "\t" ) ;
+		static::$K['SPACE'     ] = ord( " " ) ;
+		static::$K['EXCLAIM'   ] = ord( "!" ) ;
+		static::$K['QUOTEDBL'  ] = ord( "\"" ) ;
+		static::$K['HASH'      ] = ord( "#" ) ;
+		static::$K['PERCENT'   ] = ord( "%" ) ;
+		static::$K['DOLLAR'    ] = ord( "$" ) ;
+		static::$K['AMPERSAND' ] = ord( "&" ) ;
+		static::$K['QUOTE'     ] = ord( "\'" ) ;
+		static::$K['LEFTPAREN' ] = ord( "(" ) ;
+		static::$K['RIGHTPAREN'] = ord( ")" ) ;
+		static::$K['ASTERISK'  ] = ord( "*" ) ;
+		static::$K['PLUS'      ] = ord( "+" ) ;
+		static::$K['COMMA'     ] = ord( "," ) ;
+		static::$K['MINUS'     ] = ord( "-" ) ;
+		static::$K['PERIOD'    ] = ord( "." ) ;
+		static::$K['SLASH'     ] = ord( "/" ) ;
+		static::$K['0'         ] = ord( "0" ) ;
+		static::$K['1'         ] = ord( "1" ) ;
+		static::$K['2'         ] = ord( "2" ) ;
+		static::$K['3'         ] = ord( "3" ) ;
+		static::$K['4'         ] = ord( "4" ) ;
+		static::$K['5'         ] = ord( "5" ) ;
+		static::$K['6'         ] = ord( "6" ) ;
+		static::$K['7'         ] = ord( "7" ) ;
+		static::$K['8'         ] = ord( "8" ) ;
+		static::$K['9'         ] = ord( "9" ) ;
+		static::$K['COLON'     ] = ord( ":" ) ;
+		static::$K['SEMICOLON' ] = ord( ";" ) ;
+		static::$K['LESS'      ] = ord( "<" ) ;
+		static::$K['EQUALS'    ] = ord( "=" ) ;
+		static::$K['GREATER'   ] = ord( ">" ) ;
+		static::$K['QUESTION'  ] = ord( "?" ) ;
+		static::$K['AT'        ] = ord( "@" ) ;
 
-		static::$K['LEFTBRACKET' ] = ord('[' ) ;
-		static::$K['BACKSLASH'   ] = ord('\\' ) ;
-		static::$K['RIGHTBRACKET'] = ord(']' ) ;
-		static::$K['CARET'       ] = ord('^' ) ;
-		static::$K['UNDERSCORE'  ] = ord('_' ) ;
-		static::$K['BACKQUOTE'   ] = ord('`' ) ;
-		static::$K['a'           ] = ord('a' ) ;
-		static::$K['b'           ] = ord('b' ) ;
-		static::$K['c'           ] = ord('c' ) ;
-		static::$K['d'           ] = ord('d' ) ;
-		static::$K['e'           ] = ord('e' ) ;
-		static::$K['f'           ] = ord('f' ) ;
-		static::$K['g'           ] = ord('g' ) ;
-		static::$K['h'           ] = ord('h' ) ;
-		static::$K['i'           ] = ord('i' ) ;
-		static::$K['j'           ] = ord('j' ) ;
-		static::$K['k'           ] = ord('k' ) ;
-		static::$K['l'           ] = ord('l' ) ;
-		static::$K['m'           ] = ord('m' ) ;
-		static::$K['n'           ] = ord('n' ) ;
-		static::$K['o'           ] = ord('o' ) ;
-		static::$K['p'           ] = ord('p' ) ;
-		static::$K['q'           ] = ord('q' ) ;
-		static::$K['r'           ] = ord('r' ) ;
-		static::$K['s'           ] = ord('s' ) ;
-		static::$K['t'           ] = ord('t' ) ;
-		static::$K['u'           ] = ord('u' ) ;
-		static::$K['v'           ] = ord('v' ) ;
-		static::$K['w'           ] = ord('w' ) ;
-		static::$K['x'           ] = ord('x' ) ;
-		static::$K['y'           ] = ord('y' ) ;
-		static::$K['z'           ] = ord('z' ) ;
+		static::$K['LEFTBRACKET' ] = ord( "[" ) ;
+		static::$K['BACKSLASH'   ] = ord( "\\" ) ;
+		static::$K['RIGHTBRACKET'] = ord( "]" ) ;
+		static::$K['CARET'       ] = ord( "^" ) ;
+		static::$K['UNDERSCORE'  ] = ord( "_" ) ;
+		static::$K['BACKQUOTE'   ] = ord( "`" ) ;
+		static::$K['a'           ] = ord( "a" ) ;
+		static::$K['b'           ] = ord( "b" ) ;
+		static::$K['c'           ] = ord( "c" ) ;
+		static::$K['d'           ] = ord( "d" ) ;
+		static::$K['e'           ] = ord( "e" ) ;
+		static::$K['f'           ] = ord( "f" ) ;
+		static::$K['g'           ] = ord( "g" ) ;
+		static::$K['h'           ] = ord( "h" ) ;
+		static::$K['i'           ] = ord( "i" ) ;
+		static::$K['j'           ] = ord( "j" ) ;
+		static::$K['k'           ] = ord( "k" ) ;
+		static::$K['l'           ] = ord( "l" ) ;
+		static::$K['m'           ] = ord( "m" ) ;
+		static::$K['n'           ] = ord( "n" ) ;
+		static::$K['o'           ] = ord( "o" ) ;
+		static::$K['p'           ] = ord( "p" ) ;
+		static::$K['q'           ] = ord( "q" ) ;
+		static::$K['r'           ] = ord( "r" ) ;
+		static::$K['s'           ] = ord( "s" ) ;
+		static::$K['t'           ] = ord( "t" ) ;
+		static::$K['u'           ] = ord( "u" ) ;
+		static::$K['v'           ] = ord( "v" ) ;
+		static::$K['w'           ] = ord( "w" ) ;
+		static::$K['x'           ] = ord( "x" ) ;
+		static::$K['y'           ] = ord( "y" ) ;
+		static::$K['z'           ] = ord( "z" ) ;
 
 		static::$K['CAPSLOCK'    ] = static::SCANCODE_TO_KEYCODE( static::SCANCODE_CAPSLOCK ) ;
 
@@ -1269,7 +1269,7 @@ class SDL
 		static::$K['INSERT'      ] = static::SCANCODE_TO_KEYCODE( static::SCANCODE_INSERT ) ;
 		static::$K['HOME'        ] = static::SCANCODE_TO_KEYCODE( static::SCANCODE_HOME ) ;
 		static::$K['PAGEUP'      ] = static::SCANCODE_TO_KEYCODE( static::SCANCODE_PAGEUP ) ;
-		static::$K['DELETE'      ] = ord('\177' ) ;
+		static::$K['DELETE'      ] = ord( "\177" ) ;
 		static::$K['END'         ] = static::SCANCODE_TO_KEYCODE( static::SCANCODE_END ) ;
 		static::$K['PAGEDOWN'    ] = static::SCANCODE_TO_KEYCODE( static::SCANCODE_PAGEDOWN ) ;
 		static::$K['RIGHT'       ] = static::SCANCODE_TO_KEYCODE( static::SCANCODE_RIGHT ) ;
@@ -1876,6 +1876,28 @@ class SDL
 	//----------------------------------------------------------------------------------
 	// Helpers
 	//---------------------------------------------------------------------------------
+
+	public static function Rect( array|object $_r )
+	{
+		$r = SDL::$ffi->new("SDL_Rect");
+
+		if ( is_array( $_r ) )
+		{
+			$r->x = $_r[0] ;
+			$r->y = $_r[1] ;
+			$r->w = $_r[2] ;
+			$r->h = $_r[3] ;
+		}
+		else
+		{
+			$r->x = $_r->x ;
+			$r->y = $_r->y ;
+			$r->w = $_r->w ;
+			$r->h = $_r->h ;
+		}
+
+		return $r;
+	}
 
 	// void SDL_GetWindowSize(SDL_Window * window, int *w, int *h);
 	public static function GetWindowSize( object $window ) : array
