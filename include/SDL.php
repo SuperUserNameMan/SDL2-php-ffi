@@ -1179,7 +1179,7 @@ class SDL
 
 		static::$K['RETURN'    ] = ord( "\r" ) ;
 		static::$K['ESCAPE'    ] = ord( "\033" ) ;
-		static::$K['BACKSPACE' ] = ord( "\b" ) ;
+		static::$K['BACKSPACE' ] = 8 ; //ord( "\b" ) ;
 		static::$K['TAB'       ] = ord( "\t" ) ;
 		static::$K['SPACE'     ] = ord( " " ) ;
 		static::$K['EXCLAIM'   ] = ord( "!" ) ;
