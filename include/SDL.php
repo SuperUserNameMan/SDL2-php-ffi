@@ -1179,7 +1179,7 @@ class SDL
 
 		static::$K['RETURN'    ] = ord( "\r" ) ;
 		static::$K['ESCAPE'    ] = ord( "\033" ) ;
-		static::$K['BACKSPACE' ] = 8 ; //ord( "\b" ) ;
+		static::$K['BACKSPACE' ] = 8 ;
 		static::$K['TAB'       ] = ord( "\t" ) ;
 		static::$K['SPACE'     ] = ord( " " ) ;
 		static::$K['EXCLAIM'   ] = ord( "!" ) ;
@@ -1877,9 +1877,11 @@ class SDL
 	// Helpers
 	//---------------------------------------------------------------------------------
 
-	public static function Rect( array|object $_r )
+	public static function Rect( array|object $_r = null )
 	{
 		$r = SDL::$ffi->new("SDL_Rect");
+
+		if ( is_null( $_r ) ) return $r;
 
 		if ( is_array( $_r ) )
 		{
