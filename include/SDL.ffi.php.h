@@ -971,6 +971,55 @@ typedef struct SDL_Renderer SDL_Renderer;
 struct SDL_Texture;
 typedef struct SDL_Texture SDL_Texture;
 
+struct SDL_SW_YUVTexture
+{
+    Uint32 format;
+    Uint32 target_format;
+    int w, h;
+    Uint8 *pixels;
+
+    /* These are just so we don't have to allocate them separately */
+    Uint16 pitches[3];
+    Uint8 *planes[3];
+
+    /* This is a temporary surface in case we have to stretch copy */
+    SDL_Surface *stretch;
+    SDL_Surface *display;
+};
+
+typedef struct SDL_SW_YUVTexture SDL_SW_YUVTexture;
+
+struct SDL_Texture
+{
+    const void *magic;
+    Uint32 format;              /**< The pixel format of the texture */
+    int access;                 /**< SDL_TextureAccess */
+    int w;                      /**< The width of the texture */
+    int h;                      /**< The height of the texture */
+    int modMode;                /**< The texture modulation mode */
+    SDL_BlendMode blendMode;    /**< The texture blend mode */
+    SDL_ScaleMode scaleMode;    /**< The texture scale mode */
+    SDL_Color color;            /**< Texture modulation values */
+
+    SDL_Renderer *renderer;
+
+    /* Support for formats not supported directly by the renderer */
+    SDL_Texture *native;
+    SDL_SW_YUVTexture *yuv;
+    void *pixels;
+    int pitch;
+    SDL_Rect locked_rect;
+    SDL_Surface *locked_surface;  /**< Locked region exposed as a SDL surface */
+
+    Uint32 last_command_generation; /* last command queue generation this texture was in. */
+
+    void *driverdata;           /**< Driver specific texture representation */
+    void *userdata;
+
+    SDL_Texture *prev;
+    SDL_Texture *next;
+};
+
 
 int SDL_GetNumRenderDrivers(void);
 int SDL_GetRenderDriverInfo(int index, SDL_RendererInfo * info);
@@ -2710,6 +2759,25 @@ int SDL_HapticRumbleStop(SDL_Haptic * haptic);
 
 // TODO ? Well ... if you manage to understand this header better
 // than me, please, DOTO.
+
+
+struct SDL_Thread;
+typedef struct SDL_Thread SDL_Thread;
+
+typedef unsigned long SDL_threadID;
+
+typedef unsigned int SDL_TLSID;
+
+typedef enum {
+    SDL_THREAD_PRIORITY_LOW,
+    SDL_THREAD_PRIORITY_NORMAL,
+    SDL_THREAD_PRIORITY_HIGH,
+    SDL_THREAD_PRIORITY_TIME_CRITICAL
+} SDL_ThreadPriority;
+
+typedef int (*SDL_ThreadFunction) (void *data);
+
+SDL_threadID SDL_ThreadID(void);
 
 //--------------------------------------------------------------
 // Thread Synchronization Primitives : SDL_mutex.h
